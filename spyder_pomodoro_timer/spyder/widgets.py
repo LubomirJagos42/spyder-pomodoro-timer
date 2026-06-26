@@ -68,7 +68,8 @@ class PomodoroTimerStatus(BaseTimerStatus):
         self.value = "25:00"
 
         # Actual time limits
-        self.pomodoro_limit = self.get_conf("pomodoro_limit")
+        raw_limit = self.get_conf("pomodoro_limit")
+        self.pomodoro_limit = int(float(raw_limit))
         self.countdown = self.pomodoro_limit
 
         self._interval = INTERVAL
@@ -109,6 +110,6 @@ class PomodoroTimerStatus(BaseTimerStatus):
 
     @on_conf_change(option="pomodoro_limit")
     def set_pomodoro_limit(self, value):
-        self.pomodoro_limit = int(value) * 1000 * 60
+        self.pomodoro_limit = int(float(value)) * 1000 * 60
         self.countdown = self.pomodoro_limit
         self.value = self.display_time()

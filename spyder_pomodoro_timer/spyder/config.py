@@ -15,7 +15,7 @@ CONF_DEFAULTS = [
     (
         CONF_SECTION,
         {
-            "pomodoro_limit": POMODORO_DEFAULT / (60 * 1000),
+            "pomodoro_limit": POMODORO_DEFAULT // (60 * 1000),
         },
     ),
     ("shortcuts", {"pomodoro-timer start/pause": "Ctrl+Alt+Shift+P"}),

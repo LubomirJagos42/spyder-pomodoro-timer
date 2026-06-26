@@ -26,7 +26,7 @@ class SpyderPomodoroTimerConfigPage(PluginConfigPage):
             _("Pomodoro timer limit"),
             _("min"),
             "pomodoro_limit",
-            default=POMODORO_DEFAULT,
+            default=int(POMODORO_DEFAULT),
             min_=5,
             max_=100,
             step=1,
