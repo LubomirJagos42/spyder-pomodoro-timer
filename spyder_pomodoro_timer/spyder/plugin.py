@@ -44,29 +44,56 @@ class SpyderPomodoroTimer(SpyderPluginV2):
 
     # --- SpyderPluginV2 API
     # ------------------------------------------------------------------------
-    def get_name(self):
+    @staticmethod
+    def get_name():
         return _("Spyder Pomodoro Timer")
 
-    def get_description(self):
+    @staticmethod
+    def get_description():
         return _("A very simple pomodoro timer that shows in the status bar.")
 
-    def get_icon(self):
+    @staticmethod
+    def get_icon():
         return qta.icon("mdi.av-timer", color=ima.MAIN_FG_COLOR)
 
+    # def on_initialize(self):
+    #     container = self.get_container()
+    #     print("SpyderPomodoroTimer initialized!")
+
     def on_initialize(self):
+        # 1. Get the status bar plugin instance from Spyder
+        statusbar = self.get_plugin(Plugins.StatusBar)
+
+        # 2. Extract your timer widget from the plugin container
         container = self.get_container()
-        print("SpyderPomodoroTimer initialized!")
+        timer_widget = container.pomodoro_timer_status
+
+        # 3. Physically add it to the bottom bar layout
+        statusbar.add_status_widget(timer_widget)
 
     @on_plugin_available(plugin=Plugins.Preferences)
     def on_preferences_available(self):
         preferences = self.get_plugin(Plugins.Preferences)
         preferences.register_plugin_preferences(self)
 
+    # @on_plugin_available(plugin=Plugins.StatusBar)
+    # def on_statusbar_available(self):
+    #     statusbar = self.get_plugin(Plugins.StatusBar)
+    #     if statusbar:
+    #         statusbar.add_status_widget(self.pomodoro_timer_status)
+
     @on_plugin_available(plugin=Plugins.StatusBar)
     def on_statusbar_available(self):
+        """Callback when the status bar plugin becomes available."""
         statusbar = self.get_plugin(Plugins.StatusBar)
-        if statusbar:
-            statusbar.add_status_widget(self.pomodoro_timer_status)
+
+        # --- COMMENT OUT OR REMOVE THIS LINE ---
+        # statusbar.add_status_widget(self.pomodoro_timer_status)
+
+        # Keep any other code that links your toolbar to the widget, such as:
+        container = self.get_container()
+        if hasattr(container, 'pomodoro_timer_toolbar'):
+            container.pomodoro_timer_toolbar.set_status_widget(container.pomodoro_timer_status)
 
     @on_plugin_available(plugin=Plugins.Toolbar)
     def on_toolbar_available(self):

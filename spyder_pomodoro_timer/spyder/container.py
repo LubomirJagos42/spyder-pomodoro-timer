@@ -43,14 +43,15 @@ class SpyderPomodoroTimerContainer(PluginMainContainer):
         # Widgets
         self.pomodoro_timer_status = PomodoroTimerStatus(self)
         title = _("Pomodoro Timer Toolbar")
-        self.pomodoro_timer_toolbar = PomodoroTimerToolbar(self, title)
+        # self.pomodoro_timer_toolbar = PomodoroTimerToolbar(self, title)
+        self.pomodoro_timer_toolbar = PomodoroTimerToolbar(self, "Pomodoro Timer Toolbar")
 
         # Actions
         start_timer_action = self.create_action(
             PomodoroToolbarActions.Start,
             text=_("Start"),
             tip=_("Start timer"),
-            icon=qta.icon("fa.play-circle", color=ima.MAIN_FG_COLOR),
+            icon=qta.icon("fa5s.play-circle", color=ima.MAIN_FG_COLOR),
             triggered=self.start_pomodoro_timer,
         )
 
@@ -58,7 +59,7 @@ class SpyderPomodoroTimerContainer(PluginMainContainer):
             PomodoroToolbarActions.Pause,
             text=_("Pause"),
             tip=_("Pause timer"),
-            icon=qta.icon("fa.pause-circle", color=ima.MAIN_FG_COLOR),
+            icon=qta.icon("fa5s.pause-circle", color=ima.MAIN_FG_COLOR),
             triggered=self.pause_pomodoro_timer,
         )
 
@@ -66,13 +67,13 @@ class SpyderPomodoroTimerContainer(PluginMainContainer):
             PomodoroToolbarActions.Stop,
             text=_("Stop"),
             tip=_("Stop timer"),
-            icon=qta.icon("fa.stop-circle", color=ima.MAIN_FG_COLOR),
+            icon=qta.icon("fa5s.stop-circle", color=ima.MAIN_FG_COLOR),
             triggered=self.stop_pomodoro_timer,
         )
 
         self.pomodoro_menu = self.create_menu(
             "pomodoro_timer_menu",
-            text=_("Pomodoro timer"),
+            title=_("Pomodoro timer"),
             icon=qta.icon("mdi.av-timer", color=ima.MAIN_FG_COLOR),
         )
 

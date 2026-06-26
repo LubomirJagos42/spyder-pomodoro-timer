@@ -44,6 +44,15 @@ class PomodoroTimerToolbar(ApplicationToolbar):
 
     ID = "pomodoro_timer_toolbar"
 
+    def __init__(self, parent, title):
+        super().__init__(parent, self.ID, title)
+        # --- ADD THIS VARIABLE ---
+        self.status_widget = None
+
+    # --- ADD THIS METHOD ---
+    def set_status_widget(self, status_widget):
+        """Link this toolbar to the status bar timer widget."""
+        self.status_widget = status_widget
 
 class PomodoroTimerStatus(BaseTimerStatus):
     """Status bar widget to display the pomodoro timer"""
